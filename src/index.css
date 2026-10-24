@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+/* Brand colours and fonts. Use them as classes: bg-plum, text-ember, border-line… */
+@theme {
+  --color-ink: #000000;
+  --color-paper: #ffffff;
+  --color-mist: #f3f2f7;
+  --color-line: #e6e4ee;
+  --color-muted: #6b6880;
+  --color-lilac: #cdbdff;
+  --color-lilac-soft: #ece6ff;
+  --color-plum: #3a1766;
+  --color-ember: #ff8a2a;
+  --color-ok: #1f9d55;
+  --color-danger: #d4343f;
+  --font-sans: "Onest Variable", "Vazirmatn Variable", ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+html[dir="rtl"] body {
+  font-family: "Vazirmatn Variable", "Onest Variable", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Big headline type. Arabic script needs more line height and no tight spacing. */
+.display { letter-spacing: -0.045em; line-height: 0.92; }
+.tight { letter-spacing: -0.03em; }
+html[dir="rtl"] .display { letter-spacing: 0; line-height: 1.18; }
+html[dir="rtl"] .tight { letter-spacing: 0; }
+
+:focus-visible { outline: 2.5px solid var(--color-ember); outline-offset: 3px; border-radius: 6px; }
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+input[type="number"] { -moz-appearance: textfield; }
+
+/* Motion: one slow hero drift, step transitions, result reveal */
+@keyframes ribbon { 0%, 100% { transform: translate3d(0,0,0) rotate(0); } 50% { transform: translate3d(-1.5%,1%,0) rotate(-1.2deg); } }
+@keyframes sheen { from { stroke-dashoffset: 1600; } to { stroke-dashoffset: 0; } }
+@keyframes step-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes pop { 0% { transform: scale(.96); } 60% { transform: scale(1.015); } 100% { transform: scale(1); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes toast { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.ribbon { animation: ribbon 14s cubic-bezier(.22,1,.36,1) infinite; transform-origin: 50% 60%; }
+.ribbon-sheen { stroke-dasharray: 260 1340; animation: sheen 7s linear infinite; }
+.step-in { animation: step-in .45s cubic-bezier(.22,1,.36,1) both; }
+.reveal { animation: step-in .7s cubic-bezier(.22,1,.36,1) both; }
+.pop { animation: pop .28s cubic-bezier(.22,1,.36,1); }
+.spin { animation: spin 1.2s linear infinite; }
+.toast { animation: toast .3s cubic-bezier(.22,1,.36,1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
